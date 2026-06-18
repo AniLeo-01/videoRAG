@@ -1,0 +1,9 @@
+python-dotenv
+yt-dlp
+youtube-transcript-api
+tqdm
+google-genai[aiohttp]
+scenedetect
+openai
+qdrant-client
+aiohttp
