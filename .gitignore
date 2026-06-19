@@ -11,3 +11,4 @@ wheels/
 .env
 cookies.txt
 data/videos_processed/
+.DS_Store
