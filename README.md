@@ -152,32 +152,32 @@ Run everything as modules from the repo root so the `src.` imports resolve (`pyt
 
 2. **Download the videos** → `data/videos/`:
    ```bash
-   python -m src.utils.download_vids
+   uv run python -m src.utils.download_vids
    ```
 
 3. **Fetch transcripts** → `data/transcripts.json`:
    ```bash
-   python -m src.utils.download_subs
+   uv run python -m src.utils.download_subs
    ```
 
 4. **Merge subtitles into scenes** → `data/transcripts_merged.json`:
    ```bash
-   python -m src.utils.merge_subs_timeframes
+   uv run python -m src.utils.merge_subs_timeframes
    ```
 
 5. **Split videos into per-scene clips** → `data/videos_processed/`:
    ```bash
-   python -m src.utils.extract_keyframes
+   uv run python -m src.utils.extract_keyframes
    ```
 
 6. **Describe, embed and index the clips into Qdrant:**
    ```bash
-   python -m src.ingestion
+   uv run python -m src.ingestion
    ```
 
 7. **Query the system.** Enter a prompt and get back ranked YouTube links:
    ```bash
-   python -m src.pipeline
+   uv run python -m src.pipeline
    ```
    Example:
    ```
@@ -187,5 +187,19 @@ Run everything as modules from the repo root so the `src.` imports resolve (`pyt
    https://www.youtube.com/watch?v=<ID2>
    ```
 
+## Running the engine on pre-existing data
+- Start the Qdrant docker image:
+```bash
+docker run -d --name qdrant -p 6333:6333 \
+  -v "$(pwd)/qdrant_storage:/qdrant/storage" \
+  qdrant/qdrant
+```
+- Use the `app.py` to run the engine on pre-existing database:
+```bash
+uv run python app.py
+```
+The app should be loaded in http://localhost:8000. For now only search option is there in the UI.
+
 ## Notes
 - `.env.example` is only a template — replace the placeholder credentials with your own and never commit real secrets.
+
